@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación con Imágenes y Audio</title>
+    <style>
+        /* Reseteo básico y box-sizing */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .contenedor-presentacion {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .contenedor-presentacion::-webkit-scrollbar {
+            display: none;
+        }
+
+        .diapositiva {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: contain; /* Cambiado a 'contain' */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #000; /* Fondo negro para rellenar espacios */
+        }
+
+        .contenido {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- IMÁGENES DE FONDO --- */
+        #diapositiva-1 { background-image: url('ilovepdf_pages-to-jpg/Presentación Diapositivas Álbum de Fotos Pareja Romántico Scrapbook Marrón_pages-to-jpg-0001.jpg'); }
+        #diapositiva-2 { background-image: url('ilovepdf_pages-to-jpg/Presentación Diapositivas Álbum de Fotos Pareja Romántico Scrapbook Marrón_pages-to-jpg-0002.jpg'); }
+        #diapositiva-3 { background-image: url('ilovepdf_pages-to-jpg/Presentación Diapositivas Álbum de Fotos Pareja Romántico Scrapbook Marrón_pages-to-jpg-0003.jpg'); }
+        #diapositiva-4 { background-image: url('ilovepdf_pages-to-jpg/Presentación Diapositivas Álbum de Fotos Pareja Romántico Scrapbook Marrón_pages-to-jpg-0004.jpg'); }
+        #diapositiva-5 { background-image: url('ilovepdf_pages-to-jpg/Presentación Diapositivas Álbum de Fotos Pareja Romántico Scrapbook Marrón_pages-to-jpg-0005.jpg'); }
+        #diapositiva-6 { background-image: url('ilovepdf_pages-to-jpg/Presentación Diapositivas Álbum de Fotos Pareja Romántico Scrapbook Marrón_pages-to-jpg-0006.jpg'); }
+        #diapositiva-7 { background-image: url('ilovepdf_pages-to-jpg/Presentación Diapositivas Álbum de Fotos Pareja Romántico Scrapbook Marrón_pages-to-jpg-0007.jpg'); }
+        #diapositiva-8 { background-image: url('ilovepdf_pages-to-jpg/Presentación Diapositivas Álbum de Fotos Pareja Romántico Scrapbook Marrón_pages-to-jpg-0008.jpg'); }
+
+        /* Estilo de vidrio para el reproductor de audio */
+        #miAudio {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 400px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 5px;
+        }
+        
+        /* --- ✨ NUEVO: ESTILOS PARA EL AVISO DE ROTACIÓN ✨ --- */
+        #rotar-aviso {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1c1c1c;
+            color: white;
+            z-index: 200;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        #rotar-aviso p {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        #rotar-aviso .icono-rotar {
+            width: 80px;
+            height: 80px;
+            border: 3px solid white;
+            border-radius: 10px;
+            position: relative;
+            animation: rotar-animacion 2s infinite ease-in-out;
+        }
+        
+        @keyframes rotar-animacion {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-90deg); }
+            100% { transform: rotate(-90deg); }
+        }
+
+        /* Media Query que activa el aviso SÓLO en dispositivos en vertical */
+        @media screen and (orientation: portrait) {
+            #rotar-aviso {
+                display: flex; /* Muestra el aviso */
+            }
+            .contenedor-presentacion, #miAudio {
+                display: none; /* Oculta la presentación y el audio */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="rotar-aviso">
+        <div class="icono-rotar"></div>
+        <p>Para una mejor experiencia,<br>por favor gira tu dispositivo y dale play :).</p>
+    </div>
+
+    <div class="contenedor-presentacion">
+        <section id="diapositiva-1" class="diapositiva"><div class="contenido"></div></section>
+        <section id="diapositiva-2" class="diapositiva"><div class="contenido"></div></section>
+        <section id="diapositiva-3" class="diapositiva"><div class="contenido"></div></section>
+        <section id="diapositiva-4" class="diapositiva"><div class="contenido"></div></section>
+        <section id="diapositiva-5" class="diapositiva"><div class="contenido"></div></section>
+        <section id="diapositiva-6" class="diapositiva"><div class="contenido"></div></section>
+        <section id="diapositiva-7" class="diapositiva"><div class="contenido"></div></section>
+        <section id="diapositiva-8" class="diapositiva"><div class="contenido"></div></section>
+    </div>
+
+    <audio id="miAudio" controls autoplay loop>
+        <source src="sarirta.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <script>
+        window.addEventListener('load', () => {
+            const audio = document.getElementById('miAudio');
+            const promise = audio.play();
+            if (promise !== undefined) {
+                promise.catch(error => {
+                    console.warn("El autoplay fue bloqueado. Se mostrarán los controles para el usuario.");
+                });
+            }
+        });
+    </script>
+    
+</body>
+</html>
